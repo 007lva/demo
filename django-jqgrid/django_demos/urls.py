@@ -7,6 +7,7 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'jqgrid_demo.views.home', name='home'),
+    url(r'^ajax', 'jqgrid_demo.views.ajax', name='ajax'),
     # url(r'^$', 'django_demos.views.home', name='home'),
     # url(r'^django_demos/', include('django_demos.foo.urls')),
 

@@ -3,8 +3,21 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Demo JQgrid</title>
+	{% load staticfiles %}
+	<style type="text/css" src="{% static "lib/css/cupertino/jquery-ui-1.10.3.custom.min.css" %}"></style>
+	<script type="text/javascript" src="{% static "lib/jquery.min.js" %}"></script>
+	<script type="text/javascript" src="{% static "lib/jqueryui.min.js" %}"></script>
+	<script type="text/javascript" src="{% static "lib/jquery.jqGrid.min.js" %}"></script>
 </head>
 <body>
 	{{papi}}
+	<script type="text/javascript">
+		$.ajax({
+			url:'ajax',
+			success:function(data){
+				console.log(JSON.stringify(data));
+			}
+		})
+	</script>
 </body>
 </html>
