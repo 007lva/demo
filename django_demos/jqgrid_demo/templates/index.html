@@ -1,23 +1,52 @@
 <!doctype html>
-<html lang="en">
+<html lang="es-PE">
 <head>
 	<meta charset="UTF-8">
 	<title>Demo JQgrid</title>
+
 	{% load staticfiles %}
-	<style type="text/css" src="{% static "libs/css/cupertino/jquery-ui-1.10.3.custom.min.css" %}"></style>
+	<link rel="stylesheet" type="text/css" href="{% static "libs/css/cupertino/jquery-ui-1.10.3.custom.min.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "libs/css/jqgrid.min.css" %}">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="{% static "libs/i18n/grid.locale-es.js" %}"></script>
 	<script type="text/javascript" src="{% static "libs/jqgrid.min.js" %}"></script>
+
+	<style type="text/css">
+		.divgrid {width: 800px;}
+	</style>
+
 </head>
+
 <body>
-	{{papi}}
+	<div class="divgrid">
+		<table id="list_patient" width="100%"></table>
+		<div id="pager"></div>
+	</div>
+
 	<script type="text/javascript">
-		$.ajax({
-			url:'ajax',
-			success:function(data){
-				console.log(JSON.stringify(data));
-			}
-		})
+		var gridPatients = $('#list_patient').jqGrid({
+			url:'load',
+			datatype:'json',
+			colNames:['id', 'Name', 'Age', 'Weight', 'Size'],
+			colModel:[
+				{id:'id', hidden:true},
+				{name:'name', index:'name', width:220, editable:true, search:true},
+				{name:'age', index:'age', width:220, editable:true, search:true},
+				{name:'weight', index:'weight', width:220, editable:true, search:false},
+				{name:'size', index:'size', width:220, editable:true, search:false}
+				],
+			viewrecords:true,
+			pager:'#pager',
+			scrollOffset:0,
+			editurl:'crud',
+			rowNum:5
+		});
+		gridPatients.jqGrid('navGrid', '#pager', {edit:true,add:true,del:true,search:true,refresh:true}, 
+			{modal:true, closeAfterEdit:true},
+			{modal:true, closeAfterAdd:true},
+			{},
+			{modal:true, closeAfterSearch:true});
 	</script>
 </body>
 </html>

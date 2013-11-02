@@ -6,8 +6,11 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'jqgrid_demo.views.home', name='home'),
-    url(r'^ajax', 'jqgrid_demo.views.ajax', name='ajax'),
+    url(r'^$', 'jqgrid_demo.views.init', name='init'),
+    url(r'^crud', 'jqgrid_demo.views.crud', name='crud'),
+    url(r'^search', 'jqgrid_demo.views.search', name='search'),
+    url(r'^load', 'jqgrid_demo.views.load', name='load'),
+    #url(r'^ajax2', 'jqgrid_demo.views.ajax2', name='ajax2'),
     # url(r'^$', 'django_demos.views.home', name='home'),
     # url(r'^django_demos/', include('django_demos.foo.urls')),
 
