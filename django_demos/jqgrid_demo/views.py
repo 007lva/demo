@@ -9,16 +9,15 @@ def init(req):
 
 def load(req):
     search = req.GET.get('_search')
-    if search == 'true':
-        list_patient = filter(req)
-    else:
-        list_patient = Patient.objects.all()
 
-    list_patient = list(list_patient.values('name','age','weight','size'))
+    if search == 'true':
+        list_patient = list(find(req).values())
+    else:
+        list_patient = list(Patient.objects.all().values())
 
     return HttpResponse(json.dumps(list_patient), content_type='json')
 
-def filter(req):
+def find(req):
     searchField = req.GET.get('searchField')
     searchString = req.GET.get('searchString')
 
@@ -28,6 +27,7 @@ def filter(req):
         list_patient = Patient.objects.filter(age=int(searchString))
 
     return list_patient
+
 
 @csrf_exempt
 def crud(req):
